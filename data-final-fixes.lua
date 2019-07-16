@@ -3,7 +3,7 @@ function repl(path)
   return s
 end
 
-local inserters = {"inserter" , "fast-inserter", "long-handed-inserter", "filter-inserter", "stack-inserter", "stack-filter-inserter"}
+local inserters = {"burner-inserter", "inserter" , "fast-inserter", "long-handed-inserter", "filter-inserter", "stack-inserter", "stack-filter-inserter"}
 
 for index, i in ipairs(inserters) do
     data.raw["inserter"][i].hand_closed_picture.filename = repl(data.raw["inserter"][i].hand_closed_picture.filename)
