@@ -103,6 +103,11 @@ eye_rem = Image.open('eye_remnant.png')
 hr_count = 0
 lr_count = 0
 
+def cmp(a, b):
+    for i in a:
+        if i in b:
+            return True
+
 if not os.path.exists(fn):
     os.mkdir(fn)
 
@@ -110,7 +115,7 @@ for dirpath, dirnames, filenames in os.walk(fn):
     for file in filenames:
         m = hand_re.match(file)
         if m:
-            if '-stack-' in file:
+            if cmp(['-stack-', '-big-', '-stripe-'], file):
                 add_stack_hand_eyes(dirpath, file)
             else:
                 add_hand_eyes(dirpath, file)
