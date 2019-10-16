@@ -21,12 +21,25 @@ hand_stack_eye_pos_closed = [
     (68, 40),
 ]
 rem_eye_pos = [
-    (57, 9),
-    (35, 28),
-    (54, 94),
-    (31, 111),
-    (54, 171),
-    (27, 166),
+    (27, 60),
+    (45, 67),
+    (22, 119),
+    (33, 106),
+    (56, 205),
+    (72, 201),
+    (82, 306),
+    (65, 305)
+]
+
+rem_stack_eye_pos = [
+    (72, 19),
+    (82, 33),
+    (26, 131),
+    (34, 148),
+    (58, 254),
+    (76, 250),
+    (36, 324),
+    (39, 306)
 ]
 
 def add_stack_hand_eyes(path, file):
@@ -79,12 +92,33 @@ def add_hand_eyes(path, file):
 def add_rem_eyes(path, file):
     global hr_count, lr_count
     fullpath = os.path.join(path, file)
-    # 102x240
+    # 134x376
     img = Image.open(fullpath)
-    if img.size != (102, 240):
+    if img.size != (134, 376):
         print(f'WARNING: Matching file name {fullpath} with different dims {img.size} rather than (72, 164), skipping')
         return
     for x,y in rem_eye_pos:
+        img.paste(eye_rem, eye_rem_size(x, y), eye_rem)
+    img.save(fullpath)
+    print(f'Processed: {fullpath}')
+    hr_count += 1
+    if file.startswith('hr-'):
+        lr_name = file.replace('hr-', '')
+        lr_img = img.resize((52, 126), Image.BOX)
+        lr_img.save(os.path.join(path, lr_name))
+        print(f'Low-res: {os.path.join(path, lr_name)}')
+        lr_count += 1
+    print()
+
+def add_stack_rem_eyes(path, file):
+    global hr_count, lr_count
+    fullpath = os.path.join(path, file)
+    # 132x384
+    img = Image.open(fullpath)
+    if img.size != (132, 384):
+        print(f'WARNING: Matching file name {fullpath} with different dims {img.size} rather than (72, 164), skipping')
+        return
+    for x,y in rem_stack_eye_pos:
         img.paste(eye_rem, eye_rem_size(x, y), eye_rem)
     img.save(fullpath)
     print(f'Processed: {fullpath}')
@@ -121,7 +155,10 @@ for dirpath, dirnames, filenames in os.walk(fn):
                 add_hand_eyes(dirpath, file)
         m = remnants_re.match(file)
         if m:
-            add_rem_eyes(dirpath, file)
+            if cmp(['-stack-', '-big-', '-stripe-'], file):
+                add_stack_rem_eyes(dirpath, file)
+            else:
+                add_rem_eyes(dirpath, file)
 print(f'High-res files processed: {hr_count}')
 print(f'Low-res files added from HR: {lr_count}')
 print(f'Total: {hr_count+lr_count}')
