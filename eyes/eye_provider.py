@@ -104,7 +104,7 @@ def add_rem_eyes(path, file):
     hr_count += 1
     if file.startswith('hr-'):
         lr_name = file.replace('hr-', '')
-        lr_img = img.resize((52, 126), Image.BOX)
+        lr_img = img.resize((68, 192), Image.BOX)
         lr_img.save(os.path.join(path, lr_name))
         print(f'Low-res: {os.path.join(path, lr_name)}')
         lr_count += 1
@@ -125,7 +125,7 @@ def add_stack_rem_eyes(path, file):
     hr_count += 1
     if file.startswith('hr-'):
         lr_name = file.replace('hr-', '')
-        lr_img = img.resize((52, 126), Image.BOX)
+        lr_img = img.resize((66, 200), Image.BOX)
         lr_img.save(os.path.join(path, lr_name))
         print(f'Low-res: {os.path.join(path, lr_name)}')
         lr_count += 1
