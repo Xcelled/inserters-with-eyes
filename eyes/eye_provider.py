@@ -106,7 +106,7 @@ def add_rem_eyes(path, file):
         lr_name = file.replace('hr-', '')
         lr_img = img.resize((68, 192), Image.BOX)
         lr_img.save(os.path.join(path, lr_name))
-        print(f'Low-res: {os.path.join(path, lr_name)}')
+        print(f'Added low-res: {os.path.join(path, lr_name)}')
         lr_count += 1
     print()
 

@@ -1,11 +1,11 @@
 {
  "name": "inserters-with-eyes", 
- "version": "1.1.4", 
- "factorio_version": "0.17",
+ "version": "1.2.0", 
+ "factorio_version": "0.18",
  "title": "Inserters with eyes", 
  "author": "alkarian", 
  "contact": "", 
  "homepage": "", 
  "description": "Adds eyes to inserters because obviously they have to see what they do. Initial set of eyes provided by /u/mm177",
- "dependencies": ["base >= 0.17.70", "? boblogistics >= 0.17.0", "! InserterEyes"]
+ "dependencies": ["base >= 0.18.0", "? boblogistics >= 0.18.0", "! InserterEyes"]
 }
